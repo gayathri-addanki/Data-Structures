@@ -1,0 +1,146 @@
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.next = None
+
+class CircularSinglyLinkedList:
+    def _init_(self):
+        self.start = None
+
+    def create(self):
+        n = int(input("Enter number of elements: "))
+        for i in range(n):
+            e = int(input("Enter element: "))
+            new_node = Node(e)
+            if self.start is None:
+                self.start = new_node
+                new_node.next = self.start
+            else:
+                temp = self.start
+                while temp.next != self.start:
+                    temp = temp.next
+                temp.next = new_node
+                new_node.next = self.start
+
+    def display(self):
+        if self.start is None:
+            print("List is empty")
+        else:
+            temp = self.start
+            result = []
+            while True:
+                result.append(temp.data)
+                temp = temp.next
+                if temp == self.start:
+                    break
+            print("List:", result)
+
+    def insert_beg(self):
+        e = int(input("Enter element to be inserted: "))
+        new_node = Node(e)
+        if self.start is None:
+            self.start = new_node
+            new_node.next = self.start
+        else:
+            temp = self.start
+            while temp.next != self.start:
+                temp = temp.next
+            new_node.next = self.start
+            temp.next = new_node
+            self.start = new_node
+
+    def insert_end(self):
+        e = int(input("Enter element to be inserted: "))
+        new_node = Node(e)
+        if self.start is None:
+            self.start = new_node
+            new_node.next = self.start
+        else:
+            temp = self.start
+            while temp.next != self.start:
+                temp = temp.next
+            temp.next = new_node
+            new_node.next = self.start
+
+    def insert_pos(self):
+        pos = int(input("Enter position: "))
+        e = int(input("Enter element to be inserted: "))
+        new_node = Node(e)
+        temp = self.start
+        if pos == 1:
+            self.insert_beg()
+        else:
+            for i in range(1, pos - 1):
+                temp = temp.next
+            new_node.next = temp.next
+            temp.next = new_node
+
+    def del_beg(self):
+        if self.start is None:
+            print("List is empty")
+        else:
+            temp = self.start
+            while temp.next != self.start:
+                temp = temp.next
+            temp.next = self.start.next
+            self.start = self.start.next
+
+    def del_end(self):
+        if self.start is None:
+            print("List is empty")
+        else:
+            temp = self.start
+            prev = None
+            while temp.next != self.start:
+                prev = temp
+                temp = temp.next
+            prev.next = self.start
+
+    def del_pos(self):
+        pos = int(input("Enter position to delete: "))
+        if self.start is None:
+            print("List is empty")
+        else:
+            temp = self.start
+            if pos == 1:
+                self.del_beg()
+            else:
+                for i in range(1, pos - 1):
+                    temp = temp.next
+                temp.next = temp.next.next
+
+if _name_ == "_main_":
+    cll = CircularSinglyLinkedList()
+
+    while True:
+        print("Select choice:")
+        print("1. Create")
+        print("2. Display")
+        print("3. Insert at beginning")
+        print("4. Insert at end")
+        print("5. Insert at position")
+        print("6. Delete at beginning")
+        print("7. Delete at end")
+        print("8. Delete at position")
+        choice = int(input())
+        
+        if choice == 1:
+            cll.create()
+        elif choice == 2:
+            cll.display()
+        elif choice == 3:
+            cll.insert_beg()
+        elif choice == 4:
+            cll.insert_end()
+        elif choice == 5:
+            cll.insert_pos()
+        elif choice == 6:
+            cll.del_beg()
+        elif choice == 7:
+            cll.del_end()
+        elif choice == 8:
+            cll.del_pos()
+        else:
+            print("Invalid choice")
+        
+        print()
