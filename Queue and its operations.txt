@@ -1,0 +1,57 @@
+def createQueue():
+    queue = []
+    return queue
+
+def isEmpty(queue):
+    return len(queue) == 0
+
+def enqueue(queue, item):
+    queue.append(item)
+    print(f"{item} enqueued to queue")
+
+def dequeue(queue):
+    if isEmpty(queue):
+        return "Queue is empty"
+    return queue.pop(0)
+
+def peek(queue):
+    if isEmpty(queue):
+        return "Queue is empty"
+    return queue[0]
+
+def display(queue):
+    print(f"Queue: {queue}")
+
+if _name_ == "_main_":
+    queue = createQueue()
+    
+    while True:
+        print("\nOptions:")
+        print("1. Enqueue")
+        print("2. Dequeue")
+        print("3. Peek")
+        print("4. Display Queue")
+        print("5. Exit")
+        
+        choice = input("Choose an option (1/2/3/4/5): ")
+        
+        if choice == '1':
+            item = input("Enter item to enqueue: ")
+            enqueue(queue, item)
+        elif choice == '2':
+            dequeued_item = dequeue(queue)
+            if dequeued_item == "Queue is empty":
+                print(dequeued_item)
+            else:
+                print(f"Dequeued: {dequeued_item}")
+        elif choice == '3':
+            front_item = peek(queue)
+            print(f"Front item: {front_item}")
+        elif choice == '4':
+            display(queue)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+    
+    print("Final Queue:", queue)
