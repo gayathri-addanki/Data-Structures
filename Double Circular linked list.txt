@@ -1,0 +1,160 @@
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class DoublyCircularLinkedList:
+    def _init_(self):
+        self.head = None
+
+    def create(self):
+        n = int(input("Enter number of elements: "))
+        for i in range(n):
+            e = int(input("Enter element: "))
+            new_node = Node(e)
+            if self.head is None:
+                self.head = new_node
+                new_node.next = self.head
+                new_node.prev = self.head
+            else:
+                temp = self.head.prev
+                temp.next = new_node
+                new_node.prev = temp
+                new_node.next = self.head
+                self.head.prev = new_node
+
+    def display(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            temp = self.head
+            result = []
+            while True:
+                result.append(temp.data)
+                temp = temp.next
+                if temp == self.head:
+                    break
+            print("List:", result)
+
+    def insert_beg(self):
+        e = int(input("Enter element to be inserted at beginning: "))
+        new_node = Node(e)
+        if self.head is None:
+            self.head = new_node
+            new_node.next = self.head
+            new_node.prev = self.head
+        else:
+            temp = self.head.prev
+            new_node.next = self.head
+            new_node.prev = temp
+            temp.next = new_node
+            self.head.prev = new_node
+            self.head = new_node
+
+    def insert_end(self):
+        e = int(input("Enter element to be inserted at end: "))
+        new_node = Node(e)
+        if self.head is None:
+            self.head = new_node
+            new_node.next = self.head
+            new_node.prev = self.head
+        else:
+            temp = self.head.prev
+            new_node.next = self.head
+            new_node.prev = temp
+            temp.next = new_node
+            self.head.prev = new_node
+
+    def insert_pos(self):
+        pos = int(input("Enter position to insert: "))
+        e = int(input("Enter element to be inserted: "))
+        new_node = Node(e)
+        if pos == 1:
+            self.insert_beg()
+        else:
+            temp = self.head
+            for i in range(1, pos - 1):
+                if temp.next == self.head:
+                    print("Position out of bounds")
+                    return
+                temp = temp.next
+            new_node.next = temp.next
+            new_node.prev = temp
+            temp.next.prev = new_node
+            temp.next = new_node
+
+    def del_beg(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            if self.head.next == self.head:
+                self.head = None
+            else:
+                temp = self.head.prev
+                temp.next = self.head.next
+                self.head.next.prev = temp
+                self.head = self.head.next
+
+    def del_end(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            if self.head.next == self.head:
+                self.head = None
+            else:
+                temp = self.head.prev
+                temp.prev.next = self.head
+                self.head.prev = temp.prev
+
+    def del_pos(self):
+        pos = int(input("Enter position to delete: "))
+        if self.head is None:
+            print("List is empty")
+        elif pos == 1:
+            self.del_beg()
+        else:
+            temp = self.head
+            for i in range(1, pos):
+                if temp.next == self.head:
+                    print("Position out of bounds")
+                    return
+                temp = temp.next
+            temp.prev.next = temp.next
+            temp.next.prev = temp
+
+if _name_ == "_main_":
+    dll = DoublyCircularLinkedList()
+
+    while True:
+        print("Select choice:")
+        print("1. Create")
+        print("2. Display")
+        print("3. Insert at beginning")
+        print("4. Insert at end")
+        print("5. Insert at position")
+        print("6. Delete at beginning")
+        print("7. Delete at end")
+        print("8. Delete at position")
+        choice = int(input())
+
+        if choice == 1:
+            dll.create()
+        elif choice == 2:
+            dll.display()
+        elif choice == 3:
+            dll.insert_beg()
+        elif choice == 4:
+            dll.insert_end()
+        elif choice == 5:
+            dll.insert_pos()
+        elif choice == 6:
+            dll.del_beg()
+        elif choice == 7:
+            dll.del_end()
+        elif choice == 8:
+            dll.del_pos()
+        else:
+            print("Invalid choice")
+
+        print()
