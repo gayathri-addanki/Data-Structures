@@ -1,0 +1,57 @@
+def createStack():
+    stack = []
+    return stack
+
+def isEmpty(stack):
+    return len(stack) == 0
+
+def push(stack, item):
+    stack.append(item)
+    print(f"{item} pushed to stack")
+
+def pop(stack):
+    if isEmpty(stack):
+        return "Stack is empty"
+    return stack.pop()
+
+def peek(stack):
+    if isEmpty(stack):
+        return "Stack is empty"
+    return stack[-1]
+
+def display(stack):
+    print(f"Stack: {stack}")
+
+if _name_ == "_main_":
+    stack = createStack()
+    
+    while True:
+        print("\nOptions:")
+        print("1. Push")
+        print("2. Pop")
+        print("3. Peek")
+        print("4. Display Stack")
+        print("5. Exit")
+        
+        choice = input("Choose an option (1/2/3/4/5): ")
+        
+        if choice == '1':
+            item = input("Enter item to push: ")
+            push(stack, item)
+        elif choice == '2':
+            popped_item = pop(stack)
+            if popped_item == "Stack is empty":
+                print(popped_item)
+            else:
+                print(f"Popped: {popped_item}")
+        elif choice == '3':
+            top_item = peek(stack)
+            print(f"Top item: {top_item}")
+        elif choice == '4':
+            display(stack)
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+    
+    print("Final Stack:", stack)
