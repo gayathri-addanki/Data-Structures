@@ -1,2 +1,2 @@
-# Data Structures For Beginners#
-This is implementation of single linked list and its operations
+# Data Structures For Beginners #
+This is implementation of linked list and its types
